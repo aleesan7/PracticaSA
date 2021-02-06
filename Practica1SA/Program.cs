@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,21 +12,167 @@ namespace Practica1SA
 {
     class Program
     {
+        //Main function of the program
         static void Main(string[] args)
         {
-            GetItems();
-            string newId = PostItem("Alejandro Sanchez", "Male", "2318153440101@ingenieria.usac.edu.gt", "Active");
+            //GetItems();
+            //string newId = PostItem("Alejandro Sanchez", "Male", "2318153440101@ingenieria.usac.edu.gt", "Active");
 
-            if (!newId.Equals("")) { 
-                GetItem(int.Parse(newId));
-                PatchItem(int.Parse(newId), "Alejandro", "Male", "kevinalejandro@email.com", "Active");
-                DeleteItem(int.Parse(newId));
+            //if (!newId.Equals("")) { 
+            //    GetItem(int.Parse(newId));
+            //    PatchItem(int.Parse(newId), "Alejandro", "Male", "kevinalejandro@email.com", "Active");
+            //    DeleteItem(int.Parse(newId));
+            //}
+            // Ask the user to choose an operator.
+
+            ShowMainMenu();
+        }
+
+        //Displays the main menu of the application
+        public static void ShowMainMenu()
+        {
+            //Clean the output
+            Console.Clear();
+
+            //Display the available options
+            Console.WriteLine("Choose an option from the following list:");
+            Console.WriteLine("\tg - Get list of users");
+            Console.WriteLine("\tgu - Get especific user by id");
+            Console.WriteLine("\tc - Create user");
+            Console.WriteLine("\tu - Update user");
+            Console.WriteLine("\td - Delete user");
+            Console.WriteLine("\te - Exit");
+            Console.Write("Your option? ");
+
+            string action = Console.ReadLine();
+
+            //Route to the desired option
+            OptionsRouter(action);
+        }
+
+
+        //Routes the flow of the applications based on the option that the user selected
+        public static void OptionsRouter(string action)
+        {
+            switch (action)
+            {
+                case "g":
+                    GetItems();
+                    ShowMainMenu();
+                    break;
+                case "gu":
+                    ShowGetUserMenu();
+                    ShowMainMenu();
+                    break;
+                case "c":
+                    ShowCreateUserMenu();
+                    ShowMainMenu();
+                    break;
+                case "u":
+                    ShowUpdateUserMenu();
+                    ShowMainMenu();
+                    break;
+                case "d":
+                    ShowDeleteUserMenu();
+                    ShowMainMenu();
+                    break;
+                case "e":
+                    Environment.Exit(0);
+                    break;
             }
         }
 
+        //Displays the menu for the get user option
+        public static void ShowGetUserMenu()
+        {
+            // Declare variables and set to empty.
+            string userID = "";
+
+            // Ask the user to type the first number.
+            Console.Write("Type an user ID, and then press Enter: ");
+            userID = Console.ReadLine();
+
+            GetItem(int.Parse(userID));
+        }
+
+        //Displays the menu for the create user option
+        public static void ShowCreateUserMenu()
+        {
+            // Declare variables and set to empty.
+            string name = "";
+            string gender = "";
+            string email = "";
+            string status = "";
+
+            // Ask the user to type the name.
+            Console.Write("Type the name of the new user, and then press Enter: ");
+            name = Console.ReadLine();
+
+            // Ask the user to type the gender.
+            Console.Write("Type the gender of the new user, and then press Enter: ");
+            gender = Console.ReadLine();
+
+            // Ask the user to type the email.
+            Console.Write("Type the email of the new user, and then press Enter: ");
+            email = Console.ReadLine();
+
+            // Ask the user to type the status.
+            Console.Write("Type the status of the new user, and then press Enter: ");
+            status = Console.ReadLine();
+
+            PostItem(name, gender, email, status);
+        }
+
+        //Displays the menu for the update user option
+        public static void ShowUpdateUserMenu()
+        {
+            // Declare variables and set to empty.
+            string userID = "";
+            string name = "";
+            string gender = "";
+            string email = "";
+            string status = "";
+
+            //Ask the user to type the id of the user to update
+            Console.Write("Type the id of the user to update, and then press Enter: ");
+            userID = Console.ReadLine();
+
+            // Ask the user to type the name.
+            Console.Write("Type the new name of the user, and then press Enter: ");
+            name = Console.ReadLine();
+
+            // Ask the user to type the gender.
+            Console.Write("Type the new gender of the user, and then press Enter: ");
+            gender = Console.ReadLine();
+
+            // Ask the user to type the email.
+            Console.Write("Type the new email of the user, and then press Enter: ");
+            email = Console.ReadLine();
+
+            // Ask the user to type the status.
+            Console.Write("Type the new status of the user, and then press Enter: ");
+            status = Console.ReadLine();
+
+            PatchItem(int.Parse(userID), name, gender, email, status);
+        }
+
+        //Displays the menu for the delete user option
+        public static void ShowDeleteUserMenu()
+        {
+            // Declare variables and set to empty.
+            string userID = "";
+
+            // Ask the user to type the first number.
+            Console.Write("Type the user ID of the user to delete, and then press Enter: ");
+            userID = Console.ReadLine();
+
+            DeleteItem(int.Parse(userID));
+        }
+
+        //Method that gets a specific user
         private static void GetItem(int id)
         {
-            var url = $"https://gorest.co.in/public-api/users/{id}";
+            var url = ConfigurationManager.AppSettings["goRestURL"].ToString() + $"{id}";
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
             request.ContentType = "application/json";
@@ -58,9 +205,10 @@ namespace Practica1SA
             }
         }
 
+        //Method that gets all the users
         private static void GetItems()
         {
-            var url = $"https://gorest.co.in/public-api/users";
+            var url = ConfigurationManager.AppSettings["goRestURL"].ToString();
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
             request.ContentType = "application/json";
@@ -93,9 +241,10 @@ namespace Practica1SA
             }
         }
 
+        //Method that creates a new user
         private static string PostItem(string name, string gender, string email, string status)
         {
-            var url = $"https://gorest.co.in/public-api/users";
+            var url = ConfigurationManager.AppSettings["goRestURL"].ToString();
             var request = (HttpWebRequest)WebRequest.Create(url);
             string json = $"{{\"name\":\"{name}\", \"gender\":\"{gender}\", \"email\":\"{email}\", \"status\":\"{status}\"}}";
             request.Method = "POST";
@@ -140,9 +289,10 @@ namespace Practica1SA
             }
         }
 
+        //Method that updates an existing user
         private static void PatchItem(int id, string name, string gender, string email, string status)
         {
-            var url = $"https://gorest.co.in/public-api/users/{id}";
+            var url = ConfigurationManager.AppSettings["goRestURL"].ToString() + $"{id}";
             var request = (HttpWebRequest)WebRequest.Create(url);
             string json = $"{{\"id\":\"{id}\", \"name\":\"{name}\", \"gender\":\"{gender}\", \"email\":\"{email}\", \"status\":\"{status}\"}}";
             request.Method = "PATCH";
@@ -186,9 +336,10 @@ namespace Practica1SA
             }
         }
 
+        //Method that deletes an existing user
         private static void DeleteItem(int id)
         {
-            var url = $"https://gorest.co.in/public-api/users/{id}";
+            var url = ConfigurationManager.AppSettings["goRestURL"].ToString() + $"{id}";
             var request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "DELETE";
             request.ContentType = "application/json";
