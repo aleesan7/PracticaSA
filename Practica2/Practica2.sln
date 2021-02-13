@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1340
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practica2-Calculator", "Practica2\Practica2-Calculator.csproj", "{76985DB4-300D-48E4-97AE-CE47DACADFDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Practica2-TokenGenerator", "Practica2-TokenGenerator\Practica2-TokenGenerator.csproj", "{363F8828-3DEE-4E24-B40C-E8C88898F630}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76985DB4-300D-48E4-97AE-CE47DACADFDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76985DB4-300D-48E4-97AE-CE47DACADFDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76985DB4-300D-48E4-97AE-CE47DACADFDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76985DB4-300D-48E4-97AE-CE47DACADFDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{363F8828-3DEE-4E24-B40C-E8C88898F630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363F8828-3DEE-4E24-B40C-E8C88898F630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363F8828-3DEE-4E24-B40C-E8C88898F630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363F8828-3DEE-4E24-B40C-E8C88898F630}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A5AFCC31-40EC-4B33-8A4E-67E757BDA3C8}
+	EndGlobalSection
+EndGlobal
