@@ -1,0 +1,14 @@
+{
+  "name": "clientmicroservice",
+  "version": "1.0.0",
+  "description": "Clients microservice",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Alejandro Sanchez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
