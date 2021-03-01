@@ -9,6 +9,7 @@
   "author": "Alejandro Sanchez",
   "license": "ISC",
   "dependencies": {
+    "collections": "^5.1.12",
     "express": "^4.17.1"
   }
 }

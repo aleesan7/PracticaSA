@@ -21,7 +21,7 @@ app.post('/restaurant/receiveOrder', (req, res) => {
 
 app.get('/restaurant/orderStatus', (req, res) => {
   var { OrderID, ClientID } = req.query
-  var order = { orderID:"3", status:"In progress" };
+  var order = { orderID:"2", status:"In progress" };
   console.log(req.query);
   if(order.orderID===OrderID)
   {

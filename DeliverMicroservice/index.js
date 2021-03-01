@@ -8,10 +8,11 @@ app.get('/', (req, res) => {
 });
 
 app.post('/delivery/receiveOrder', (req, res) => {
-  const { clientID, restaurant, menu, address } = req.body
+  const { orderID, clientID, restaurant, menu, address } = req.body
   console.log(req.body);
   res.json({ Message: "The delivery guy has received the order with the following details: ",
    details: {
+   OrderID: orderID,
    ReceivedMenu: menu,
    Restaurant: restaurant,
    ClientID: clientID,
@@ -21,15 +22,14 @@ app.post('/delivery/receiveOrder', (req, res) => {
 })
 
 app.get('/delivery/orderStatus', (req, res) => {
-  var { OrderID, ClientID } = req.query
-  var order = { orderID:"3", status:"On its way to your location, 5 minutes away." };
+  var { OrderID } = req.query
+  var order = { orderID:"2", status:"On its way to your location, 5 minutes away." };
   console.log(req.query);
   if(order.orderID===OrderID)
   {
     console.log(order.orderID);
     res.json({ Message: "This is the detail for the requested order ",
     details: {
-    clientID : ClientID,
     orderID: order.orderID,
     status: order.status}
   })

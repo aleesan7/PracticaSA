@@ -1,5 +1,11 @@
 const express = require('express')
+var Map = require("collections/map")
 const app = express();
+const port = 7000;
+
+var orderID = 0;
+
+var map = new Map();
 
 app.use(express.json())
 
@@ -9,7 +15,12 @@ app.get('/', (req, res) => {
 
 app.post('/client/order', (req, res) => {
   const { clientID, Restaurant, Menu } = req.body
-  console.log(req.body);
+  
+  const obj = req.body;
+  orderID = orderID + 1;
+  map.set(orderID, obj);
+
+  //console.log(map.entries());
   res.json({ Message: "This is the order that you have requested: ",
    details: {
    ReceivedMenu: Menu,
@@ -19,17 +30,15 @@ app.post('/client/order', (req, res) => {
 })
 
 app.get('/client/getorderstatus', (req, res) => {
-  var { OrderID, ClientID } = req.query
-  var order = { orderID:"3", status:"In progress" };
-  console.log(req.query);
-  if(order.orderID===OrderID)
+  var { OrderID } = req.query
+  
+  var order = map.get(parseInt(OrderID));
+  //console.log(OrderID);
+  //console.log(map.get(parseInt(OrderID)));
+  if(order!=null)
   {
-    console.log(order.orderID);
-    res.json({ Message: "This is the detail for the requested order ",
-    details: {
-    clientID : ClientID,
-    orderID: order.orderID,
-    status: order.status}
+    res.json({ Message: "This is the requested order ",
+    order
   })
   }else
   {
@@ -38,15 +47,14 @@ app.get('/client/getorderstatus', (req, res) => {
 })
 
 app.get('/client/getstatusfromdelivery', (req, res) => {
-  var { OrderID, ClientID } = req.query
-  var order = { orderID:"3", status:"On its way to your location." };
+  var { OrderID } = req.query
+  var order = { orderID:"2", status:"On its way to your location." };
   console.log(req.query);
   if(order.orderID===OrderID)
   {
     console.log(order.orderID);
     res.json({ Message: "This is the information of your order with the delivery guy: ",
     details: {
-    clientID : ClientID,
     orderID: order.orderID,
     status: order.status}
   })
@@ -56,6 +64,6 @@ app.get('/client/getstatusfromdelivery', (req, res) => {
   }
 })
 
-app.listen(7000, () => {
+app.listen(port, () => {
   console.log('Example app listening on port 7000!')
 });
