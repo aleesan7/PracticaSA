@@ -1,0 +1,15 @@
+{
+  "name": "restaurantmicroservice",
+  "version": "1.0.0",
+  "description": "Restaurant micro service",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Alejandro Sanchez",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {}
+}
