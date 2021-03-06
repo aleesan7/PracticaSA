@@ -10,7 +10,7 @@ var map = new Map();
 app.use(express.json())
 
 app.get('/', (req, res) => {
-  res.send('Clients Microservice!')
+  res.send('Clients Microservice!');
 });
 
 app.post('/client/order', (req, res) => {
