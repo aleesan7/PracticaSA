@@ -11,11 +11,5 @@
   "dependencies": {
     "collections": "^5.1.12",
     "express": "^4.17.1"
-  },
-  "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-uglify": "^3.0.2",
-    "gulp-zip": "^5.0.2"
   }
 }

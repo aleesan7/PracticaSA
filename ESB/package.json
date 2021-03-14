@@ -9,7 +9,11 @@
     "express": "^4.17.1",
     "fs": "0.0.1-security"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "gulp-zip": "^5.1.0"
+  },
   "scripts": {
     "test": "mocha"
   },
