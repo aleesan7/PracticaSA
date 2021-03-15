@@ -20,7 +20,7 @@ app.post('/client/order', (req, res) => {
   orderID = orderID + 1;
   map.set(orderID, obj);
 
-  //console.log(map.entries());
+  console.log(map.entries());
   res.json({ Message: "This is the order that you have requested: ",
    details: {
    ReceivedMenu: Menu,
