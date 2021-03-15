@@ -6,12 +6,18 @@
   "dependencies": {
     "axios": "^0.21.1",
     "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "fs": "0.0.1-security"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0"
+  },
   "scripts": {
-    "test": "mocha"
+    "test": "nyc mocha"
   },
   "author": "Alejandro Sanchez",
   "license": "ISC"
