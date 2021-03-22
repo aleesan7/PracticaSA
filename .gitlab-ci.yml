@@ -1,0 +1,37 @@
+stages:
+    - test
+    - deploy
+    - package
+  
+  UnitTest:
+    stage: test
+    image: node:latest
+    script:
+      - cd ClientMicroservice/
+      - npm install
+      - npm run test
+    except:
+      - master
+  
+  ArtifactsGeneration:
+    stage: deploy
+    image: node:latest
+    script:
+      - cd ClientMicroservice/
+      - npm install
+      - npm install -g gulp
+      - gulp 'minify'
+      - gulp 'copy-packagejson'
+      - gulp 'zip'
+    except:
+      - master
+
+    package:
+    stage: package
+    script: 
+      - cd ClientMicroservice/build
+        cat index.js | gzip > packaged.gz
+    artifacts:
+        paths:
+        - packaged.gz
+  
