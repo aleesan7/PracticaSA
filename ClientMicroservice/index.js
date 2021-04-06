@@ -20,7 +20,7 @@ app.post('/client/order', (req, res) => {
   orderID = orderID + 1;
   map.set(orderID, obj);
 
-  console.log(map.entries());
+  //console.log(map.entries());
   res.json({ Message: "This is the order that you have requested: ",
    details: {
    ReceivedMenu: Menu,
@@ -52,7 +52,7 @@ app.get('/client/getstatusfromdelivery', (req, res) => {
   console.log(req.query);
   if(order.orderID===OrderID)
   {
-    console.log(order.orderID);
+    //console.log(order.orderID);
     res.json({ Message: "This is the information of your order with the delivery guy: ",
     details: {
     orderID: order.orderID,
@@ -64,6 +64,4 @@ app.get('/client/getstatusfromdelivery', (req, res) => {
   }
 })
 
-app.listen(port, () => {
-  console.log('Example app listening on port 7000!')
-});
+module.exports = app.listen(port);

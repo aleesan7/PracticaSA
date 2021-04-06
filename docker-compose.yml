@@ -1,0 +1,26 @@
+version: '3.7'
+volumes:
+    mysql-db:
+        name: mysql-db
+services:
+    catalogmicroservice:
+        container_name: catalogmicroserviceSA
+        build:
+            dockerfile: Dockerfile
+            context: ./CatalogMicroservice
+        ports:
+            - '80:3000'
+        environment: 
+            - HOST=mysql-database-practicaSA
+        depends_on: 
+            - mysql-db
+    mysql-db:
+        container_name: mysql-database-practicaSA
+        build:
+            dockerfile: Dockerfile
+            context: ./DatabaseService
+        ports:
+            - '33070:3306'
+        volumes:
+            - 'mysql-db:/var/lib/mysql-db'
+    
