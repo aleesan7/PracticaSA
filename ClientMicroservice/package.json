@@ -4,7 +4,7 @@
   "description": "Clients microservice",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "nyc mocha"
   },
   "author": "Alejandro Sanchez",
   "license": "ISC",
@@ -16,6 +16,10 @@
     "chai": "^4.3.4",
     "chai-http": "^4.3.0",
     "cors": "^2.8.5",
-    "mocha": "^8.3.2"
+    "gulp": "^4.0.2",
+    "gulp-uglify": "^3.0.2",
+    "gulp-zip": "^5.1.0",
+    "mocha": "^8.3.2",
+    "nyc": "^15.1.0"
   }
 }
