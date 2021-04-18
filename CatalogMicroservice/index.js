@@ -8,7 +8,7 @@ const cors = require('cors')
 const path = require('path');
 const port = process.env.PORT || 3000;
 
-var products = require('./src/routes/catalog')
+var users = require('./src/routes/catalog')
 
 const app = express();
 
@@ -24,7 +24,7 @@ app.use(express.json());
 //app.set('views', path.join(__dirname, '/src/views'));
 //app.use(express.static(path.join(__dirname, '/src/public')));
 
-app.use('/', products);
+app.use('/', users);
 
 app.listen(port, function() {
     console.log('Servidor corriendo en el puerto ' + port);
