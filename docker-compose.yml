@@ -1,7 +1,12 @@
 version: '3.7'
 volumes:
-    mysql-db:
-        name: mysql-db
+    mysql-db-data:
+        name: mysql-db-data
+    sonarqube_conf:
+    sonarqube_data:
+    sonarqube_extensions:
+    sonarqube_bundled-plugins:
+
 services:
     catalogmicroservice:
         container_name: catalogmicroserviceSA
@@ -14,13 +19,36 @@ services:
             - HOST=mysql-database-practicaSA
         depends_on: 
             - mysql-db
+    sonarqube:
+        image: sonarqube:7.0
+        container_name: sonarqube2
+        depends_on:
+            - mysql-db
+        volumes:
+            - sonarqube_conf:/opt/sonarqube/conf
+            - sonarqube_data:/opt/sonarqube/data
+            - sonarqube_extensions:/opt/sonarqube/extensions
+            - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
+        command: -Dsonar.web.context=/sonarqube
+        ports:
+            - 9000:9000
+            - 9092:9092
+        environment:
+            - SONAR_JDBC_USERNAME=sonar
+            - SONAR_JDBC_PASSWORD=sonar
+            - SONAR_JDBC_URL=jdbc:mysql://172.22.0.2:33060/sonar?useUnicode=true&characterEncoding=utf8
+        restart: always
     mysql-db:
         container_name: mysql-database-practicaSA
         build:
             dockerfile: Dockerfile
             context: ./DatabaseService
         ports:
-            - '33070:3306'
+            - '33060:3306'
         volumes:
-            - 'mysql-db:/var/lib/mysql-db'
+            - 'mysql-db-data:/var/lib/mysql-db'
+
+    
+
+
     
