@@ -1,7 +1,7 @@
-FROM mysql:latest
+FROM mysql
 
 ENV MYSQL_ROOT_PASSWORD 1234 
-ENV MYSQL_DATABASE Delivery  
+ENV MYSQL_DATABASE UsersDB  
 
 COPY . /docker-entrypoint-initdb.d
 
